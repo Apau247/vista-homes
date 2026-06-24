@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { getAllUsers, createUser, deleteUser, updateUserRole, setPropertyAssignment, getPropertyAssignments, removePropertyAssignment } from '@/lib/auth';
+import { getAllUsers, createUser, deleteUser, updateUserRole, updateUserProfile, setPropertyAssignment, getPropertyAssignments, removePropertyAssignment } from '@/lib/auth';
 import { properties } from '@/lib/data';
-import { Users, Plus, X, Trash2, Shield, Phone, Image as ImageIcon } from 'lucide-react';
+import { Users, Plus, X, Trash2, Shield, Pencil, Image as ImageIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 type SessionUser = Awaited<ReturnType<typeof getAllUsers>>[number];
@@ -11,6 +11,7 @@ type SessionUser = Awaited<ReturnType<typeof getAllUsers>>[number];
 export default function AdminUsersPage() {
   const [users, setUsers] = useState<SessionUser[]>([]);
   const [showAdd, setShowAdd] = useState(false);
+  const [editUser, setEditUser] = useState<SessionUser | null>(null);
   const [assignments, setAssignments] = useState<Record<string, string>>({});
   const [form, setForm] = useState({
     name: '', email: '', password: '', role: 'user' as 'admin' | 'user',
@@ -31,6 +32,11 @@ export default function AdminUsersPage() {
     setAvatarPreview(url);
   };
 
+  const resetForm = () => {
+    setForm({ name: '', email: '', password: '', role: 'user', phone: '', avatar: '', bio: '', assignProperties: [] });
+    setAvatarPreview('');
+  };
+
   const handleCreate = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.password) {
@@ -49,8 +55,57 @@ export default function AdminUsersPage() {
     form.assignProperties.forEach((pid) => setPropertyAssignment(pid, result.id));
     toast.success('User created successfully');
     setShowAdd(false);
-    setForm({ name: '', email: '', password: '', role: 'user', phone: '', avatar: '', bio: '', assignProperties: [] });
-    setAvatarPreview('');
+    resetForm();
+    load();
+  };
+
+  const handleEdit = (u: SessionUser) => {
+    setEditUser(u);
+    const userAssignments = Object.entries(getPropertyAssignments())
+      .filter(([, v]) => v === u.id)
+      .map(([k]) => k);
+    setForm({
+      name: u.name,
+      email: u.email,
+      password: '',
+      role: u.role,
+      phone: u.phone || '',
+      avatar: u.avatar || '',
+      bio: (u as any).bio || '',
+      assignProperties: userAssignments,
+    });
+    setAvatarPreview(u.avatar || '');
+  };
+
+  const handleSaveEdit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editUser) return;
+    if (!form.name || !form.email) {
+      toast.error('Name and email are required');
+      return;
+    }
+    updateUserProfile(editUser.id, {
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      avatar: form.avatar || undefined,
+      bio: form.bio || undefined,
+      role: form.role,
+    });
+
+    const current = getPropertyAssignments();
+    Object.entries(current).forEach(([pid, uid]) => {
+      if (uid === editUser.id && !form.assignProperties.includes(pid)) {
+        removePropertyAssignment(pid);
+      }
+    });
+    form.assignProperties.forEach((pid) => {
+      setPropertyAssignment(pid, editUser.id);
+    });
+
+    toast.success('User updated');
+    setEditUser(null);
+    resetForm();
     load();
   };
 
@@ -75,12 +130,15 @@ export default function AdminUsersPage() {
   const assignedTo = (userId: string) =>
     Object.entries(assignments).filter(([, v]) => v === userId).map(([k]) => properties.find((p) => p.id === k)?.title).filter(Boolean);
 
+  type ModalMode = 'add' | 'edit';
+  const modalMode: ModalMode | null = showAdd ? 'add' : editUser ? 'edit' : null;
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-semibold text-zinc-800">User Management</h1>
         <button
-          onClick={() => setShowAdd(true)}
+          onClick={() => { resetForm(); setShowAdd(true); }}
           className="flex items-center gap-2 px-4 py-2.5 bg-navy text-white rounded-xl text-sm font-medium hover:bg-navy-light transition-colors"
         >
           <Plus className="w-4 h-4" />
@@ -88,16 +146,20 @@ export default function AdminUsersPage() {
         </button>
       </div>
 
-      {showAdd && (
+      {/* Add / Edit Modal */}
+      {modalMode && (
         <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold text-zinc-800">Add New User</h2>
-              <button onClick={() => setShowAdd(false)} className="p-1 hover:bg-zinc-100 rounded-lg transition-colors">
+              <h2 className="text-lg font-semibold text-zinc-800">{modalMode === 'add' ? 'Add New User' : 'Edit User'}</h2>
+              <button
+                onClick={() => { setShowAdd(false); setEditUser(null); resetForm(); }}
+                className="p-1 hover:bg-zinc-100 rounded-lg transition-colors"
+              >
                 <X className="w-5 h-5 text-zinc-500" />
               </button>
             </div>
-            <form onSubmit={handleCreate} className="space-y-4">
+            <form onSubmit={modalMode === 'add' ? handleCreate : handleSaveEdit} className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
                   <label className="block text-sm font-medium text-zinc-700 mb-1.5">Full Name *</label>
@@ -120,13 +182,15 @@ export default function AdminUsersPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-zinc-700 mb-1.5">Password *</label>
+                  <label className="block text-sm font-medium text-zinc-700 mb-1.5">
+                    {modalMode === 'add' ? 'Password *' : 'New Password (leave blank to keep)'}
+                  </label>
                   <input
                     type="password"
                     value={form.password}
                     onChange={(e) => setForm({ ...form, password: e.target.value })}
                     className="w-full bg-zinc-50 rounded-xl px-4 py-3 text-sm text-zinc-800 border border-zinc-200 outline-none focus:border-navy/30"
-                    placeholder="Min 6 characters"
+                    placeholder={modalMode === 'add' ? 'Min 6 characters' : 'Leave blank to keep'}
                   />
                 </div>
                 <div>
@@ -230,7 +294,7 @@ export default function AdminUsersPage() {
                 type="submit"
                 className="w-full py-3 bg-navy text-white rounded-xl font-medium hover:bg-navy-light transition-colors"
               >
-                Create User
+                {modalMode === 'add' ? 'Create User' : 'Save Changes'}
               </button>
             </form>
           </div>
@@ -297,6 +361,13 @@ export default function AdminUsersPage() {
                     <td className="px-6 py-4 text-zinc-500 text-xs">{new Date(u.createdAt).toLocaleDateString()}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleEdit(u)}
+                          className="p-2 hover:bg-zinc-100 rounded-lg transition-colors"
+                          title="Edit user"
+                        >
+                          <Pencil className="w-4 h-4 text-zinc-500" />
+                        </button>
                         <button
                           onClick={() => handleToggleRole(u.id, u.role)}
                           className="p-2 hover:bg-zinc-100 rounded-lg transition-colors"
