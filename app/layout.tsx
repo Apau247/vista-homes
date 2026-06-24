@@ -19,6 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Vista Homes | Luxury Real Estate",
   description: "Discover your dream home with Vista Homes - Premium properties across California",
+
 };
 
 export default function RootLayout({
