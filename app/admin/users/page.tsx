@@ -14,7 +14,7 @@ export default function AdminUsersPage() {
   const [assignments, setAssignments] = useState<Record<string, string>>({});
   const [form, setForm] = useState({
     name: '', email: '', password: '', role: 'user' as 'admin' | 'user',
-    phone: '', avatar: '', bio: '', assignProperty: '',
+    phone: '', avatar: '', bio: '', assignProperties: [] as string[],
   });
   const [avatarPreview, setAvatarPreview] = useState('');
 
@@ -46,12 +46,10 @@ export default function AdminUsersPage() {
       toast.error('Email already in use');
       return;
     }
-    if (form.assignProperty) {
-      setPropertyAssignment(form.assignProperty, result.id);
-    }
+    form.assignProperties.forEach((pid) => setPropertyAssignment(pid, result.id));
     toast.success('User created successfully');
     setShowAdd(false);
-    setForm({ name: '', email: '', password: '', role: 'user', phone: '', avatar: '', bio: '', assignProperty: '' });
+    setForm({ name: '', email: '', password: '', role: 'user', phone: '', avatar: '', bio: '', assignProperties: [] });
     setAvatarPreview('');
     load();
   };
@@ -193,17 +191,39 @@ export default function AdminUsersPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Assign to Property</label>
-                <select
-                  value={form.assignProperty}
-                  onChange={(e) => setForm({ ...form, assignProperty: e.target.value })}
-                  className="w-full bg-zinc-50 rounded-xl px-4 py-3 text-sm text-zinc-800 border border-zinc-200 outline-none"
-                >
-                  <option value="">-- Not assigned --</option>
-                  {properties.map((p) => (
-                    <option key={p.id} value={p.id}>{p.title} — {p.location}</option>
-                  ))}
-                </select>
+                <label className="block text-sm font-medium text-zinc-700 mb-1.5">Assign to Properties</label>
+                <div className="bg-zinc-50 rounded-xl border border-zinc-200 max-h-48 overflow-y-auto p-1.5 space-y-0.5">
+                  {properties.length === 0 && (
+                    <p className="text-xs text-zinc-400 py-2 px-2">No properties available</p>
+                  )}
+                  {properties.map((p) => {
+                    const checked = form.assignProperties.includes(p.id);
+                    return (
+                      <label
+                        key={p.id}
+                        className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
+                          checked ? 'bg-navy/10 text-navy' : 'hover:bg-zinc-100 text-zinc-700'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() =>
+                            setForm({
+                              ...form,
+                              assignProperties: checked
+                                ? form.assignProperties.filter((id) => id !== p.id)
+                                : [...form.assignProperties, p.id],
+                            })
+                          }
+                          className="w-4 h-4 accent-navy rounded"
+                        />
+                        <span className="text-sm">{p.title}</span>
+                        <span className="text-xs text-zinc-400 ml-auto">{p.location}</span>
+                      </label>
+                    );
+                  })}
+                </div>
               </div>
 
               <button
