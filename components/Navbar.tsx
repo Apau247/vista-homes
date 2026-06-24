@@ -2,13 +2,15 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, Heart, Search, ChevronDown } from 'lucide-react';
+import { Menu, X, Heart, User, LogIn } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -66,6 +68,25 @@ export default function Navbar() {
               <Heart className={`w-4 h-4 ${pathname === '/favorites' ? 'fill-navy text-navy' : ''}`} />
               Favorites
             </Link>
+            {user ? (
+              <Link
+                href="/profile"
+                className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
+                  pathname === '/profile' ? 'text-navy' : 'text-zinc-600 hover:text-navy'
+                }`}
+              >
+                <User className="w-4 h-4" />
+                {user.name.split(' ')[0]}
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center gap-1.5 text-sm font-medium text-zinc-600 hover:text-navy transition-colors"
+              >
+                <LogIn className="w-4 h-4" />
+                Sign In
+              </Link>
+            )}
           </div>
 
           <div className="flex items-center gap-3">
@@ -112,6 +133,27 @@ export default function Navbar() {
               <Heart className="w-5 h-5" />
               Favorites
             </Link>
+            {user ? (
+              <Link
+                href="/profile"
+                className={`flex items-center gap-2 py-3 px-4 rounded-xl text-base font-medium transition-colors ${
+                  pathname === '/profile'
+                    ? 'bg-navy/5 text-navy'
+                    : 'text-zinc-700 hover:bg-zinc-50'
+                }`}
+              >
+                <User className="w-5 h-5" />
+                Profile
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center gap-2 py-3 px-4 rounded-xl text-base font-medium text-zinc-700 hover:bg-zinc-50 transition-colors"
+              >
+                <LogIn className="w-5 h-5" />
+                Sign In
+              </Link>
+            )}
             <Link
               href="/submit"
               className="block text-center py-3 px-6 bg-navy text-white rounded-xl text-base font-medium hover:bg-navy-light transition-colors mt-2"

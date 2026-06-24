@@ -7,32 +7,49 @@ import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { Property } from '@/lib/data';
 import { formatPrice } from '@/lib/utils';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function PropertyCard({ property, view = 'grid' }: { property: Property; view?: 'grid' | 'list' }) {
+  const { user, addFavorite, removeFavorite, isFavorite } = useAuth();
   const [favorited, setFavorited] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('vista-favorites');
-    if (saved) {
-      const ids = JSON.parse(saved) as string[];
-      setFavorited(ids.includes(property.id));
+    if (user) {
+      setFavorited(isFavorite(property.id));
+    } else {
+      const saved = localStorage.getItem('vista-favorites');
+      if (saved) {
+        const ids = JSON.parse(saved) as string[];
+        setFavorited(ids.includes(property.id));
+      }
     }
-  }, [property.id]);
+  }, [property.id, user, isFavorite]);
 
   const toggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const saved = localStorage.getItem('vista-favorites');
-    let ids: string[] = saved ? JSON.parse(saved) : [];
-    if (favorited) {
-      ids = ids.filter((id) => id !== property.id);
-      toast.success('Removed from favorites');
+    if (user) {
+      if (favorited) {
+        removeFavorite(property.id);
+        toast.success('Removed from favorites');
+      } else {
+        addFavorite(property.id);
+        toast.success('Added to favorites');
+      }
+      setFavorited(!favorited);
     } else {
-      ids.push(property.id);
-      toast.success('Added to favorites');
+      const saved = localStorage.getItem('vista-favorites');
+      let ids: string[] = saved ? JSON.parse(saved) : [];
+      if (favorited) {
+        ids = ids.filter((id) => id !== property.id);
+        toast.success('Removed from favorites');
+      } else {
+        ids.push(property.id);
+        toast.success('Added to favorites');
+      }
+      localStorage.setItem('vista-favorites', JSON.stringify(ids));
+      setFavorited(!favorited);
     }
-    localStorage.setItem('vista-favorites', JSON.stringify(ids));
-    setFavorited(!favorited);
   };
 
   if (view === 'list') {
