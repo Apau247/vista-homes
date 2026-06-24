@@ -6,10 +6,10 @@ import { Building2, Shield, Clock, Award, Users, Target, Heart, Sparkles } from 
 import Testimonials from '@/components/Testimonials';
 
 const team = [
-  { name: 'Sarah Chen', role: 'CEO & Founder', photo: 'https://i.pravatar.cc/200?u=sarah' },
-  { name: 'Michael Torres', role: 'Head of Sales', photo: 'https://i.pravatar.cc/200?u=michael' },
-  { name: 'Elena Rodriguez', role: 'Senior Agent', photo: 'https://i.pravatar.cc/200?u=elena' },
-  { name: 'James Wilson', role: 'Commercial Director', photo: 'https://i.pravatar.cc/200?u=james' },
+  { name: 'Sarah Chen', role: 'CEO & Founder', photo: 'https://randomuser.me/api/portraits/women/44.jpg' },
+  { name: 'Michael Torres', role: 'Head of Sales', photo: 'https://randomuser.me/api/portraits/men/32.jpg' },
+  { name: 'Elena Rodriguez', role: 'Senior Agent', photo: 'https://randomuser.me/api/portraits/women/65.jpg' },
+  { name: 'James Wilson', role: 'Commercial Director', photo: 'https://randomuser.me/api/portraits/men/86.jpg' },
 ];
 
 const values = [

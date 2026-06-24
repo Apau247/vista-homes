@@ -45,7 +45,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: true,
     yearBuilt: 2022,
-    agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://i.pravatar.cc/150?u=sarah" }
+    agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://randomuser.me/api/portraits/women/44.jpg" }
   },
   {
     id: "2",
@@ -66,7 +66,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: true,
     yearBuilt: 2020,
-    agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://i.pravatar.cc/150?u=michael" }
+    agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://randomuser.me/api/portraits/men/32.jpg" }
   },
   {
     id: "3",
@@ -87,7 +87,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: false,
     yearBuilt: 1998,
-    agent: { name: "Elena Rodriguez", phone: "(626) 555-0789", email: "elena@vistahomes.com", photo: "https://i.pravatar.cc/150?u=elena" }
+    agent: { name: "Elena Rodriguez", phone: "(626) 555-0789", email: "elena@vistahomes.com", photo: "https://randomuser.me/api/portraits/women/65.jpg" }
   },
   {
     id: "4",
@@ -108,7 +108,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: true,
     yearBuilt: 2005,
-    agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://i.pravatar.cc/150?u=sarah" }
+    agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://randomuser.me/api/portraits/women/44.jpg" }
   },
   {
     id: "5",
@@ -129,7 +129,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: false,
     yearBuilt: 2015,
-    agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://i.pravatar.cc/150?u=michael" }
+    agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://randomuser.me/api/portraits/men/32.jpg" }
   },
   {
     id: "6",
@@ -150,7 +150,7 @@ export const properties: Property[] = [
     status: "For Rent",
     featured: true,
     yearBuilt: 2021,
-    agent: { name: "James Wilson", phone: "(213) 555-0321", email: "james@vistahomes.com", photo: "https://i.pravatar.cc/150?u=james" }
+    agent: { name: "James Wilson", phone: "(213) 555-0321", email: "james@vistahomes.com", photo: "https://randomuser.me/api/portraits/men/86.jpg" }
   },
   {
     id: "7",
@@ -170,7 +170,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: false,
     yearBuilt: 2010,
-    agent: { name: "James Wilson", phone: "(213) 555-0321", email: "james@vistahomes.com", photo: "https://i.pravatar.cc/150?u=james" }
+    agent: { name: "James Wilson", phone: "(213) 555-0321", email: "james@vistahomes.com", photo: "https://randomuser.me/api/portraits/men/86.jpg" }
   },
   {
     id: "8",
@@ -190,7 +190,7 @@ export const properties: Property[] = [
     status: "For Rent",
     featured: false,
     yearBuilt: 2018,
-    agent: { name: "Elena Rodriguez", phone: "(626) 555-0789", email: "elena@vistahomes.com", photo: "https://i.pravatar.cc/150?u=elena" }
+    agent: { name: "Elena Rodriguez", phone: "(626) 555-0789", email: "elena@vistahomes.com", photo: "https://randomuser.me/api/portraits/women/65.jpg" }
   },
   {
     id: "9",
@@ -211,7 +211,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: true,
     yearBuilt: 2023,
-    agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://i.pravatar.cc/150?u=sarah" }
+    agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://randomuser.me/api/portraits/women/44.jpg" }
   },
   {
     id: "10",
@@ -231,7 +231,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: false,
     yearBuilt: 1925,
-    agent: { name: "Elena Rodriguez", phone: "(626) 555-0789", email: "elena@vistahomes.com", photo: "https://i.pravatar.cc/150?u=elena" }
+    agent: { name: "Elena Rodriguez", phone: "(626) 555-0789", email: "elena@vistahomes.com", photo: "https://randomuser.me/api/portraits/women/65.jpg" }
   },
   {
     id: "11",
@@ -252,7 +252,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: true,
     yearBuilt: 2019,
-    agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://i.pravatar.cc/150?u=michael" }
+    agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://randomuser.me/api/portraits/men/32.jpg" }
   },
   {
     id: "12",
@@ -273,7 +273,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: false,
     yearBuilt: 2020,
-    agent: { name: "James Wilson", phone: "(213) 555-0321", email: "james@vistahomes.com", photo: "https://i.pravatar.cc/150?u=james" }
+    agent: { name: "James Wilson", phone: "(213) 555-0321", email: "james@vistahomes.com", photo: "https://randomuser.me/api/portraits/men/86.jpg" }
   },
   {
     id: "13",
@@ -293,7 +293,7 @@ export const properties: Property[] = [
     status: "For Rent",
     featured: false,
     yearBuilt: 2019,
-    agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://i.pravatar.cc/150?u=michael" }
+    agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://randomuser.me/api/portraits/men/32.jpg" }
   },
   {
     id: "14",
@@ -313,7 +313,7 @@ export const properties: Property[] = [
     status: "For Rent",
     featured: false,
     yearBuilt: 2000,
-    agent: { name: "James Wilson", phone: "(213) 555-0321", email: "james@vistahomes.com", photo: "https://i.pravatar.cc/150?u=james" }
+    agent: { name: "James Wilson", phone: "(213) 555-0321", email: "james@vistahomes.com", photo: "https://randomuser.me/api/portraits/men/86.jpg" }
   },
   {
     id: "15",
@@ -334,7 +334,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: false,
     yearBuilt: 1965,
-    agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://i.pravatar.cc/150?u=sarah" }
+    agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://randomuser.me/api/portraits/women/44.jpg" }
   },
   {
     id: "16",
@@ -355,7 +355,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: false,
     yearBuilt: 2017,
-    agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://i.pravatar.cc/150?u=michael" }
+    agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://randomuser.me/api/portraits/men/32.jpg" }
   },
 ];
 

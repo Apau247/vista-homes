@@ -31,9 +31,9 @@ function getUsers(): User[] {
   const raw = localStorage.getItem(USERS_KEY);
   if (!raw) {
     const seed: User[] = [
-      { id: 'u_seed1', name: 'John Doe', email: 'john@example.com', password: hashPassword('password123'), phone: '(310) 555-1001', avatar: 'https://i.pravatar.cc/150?u=john', favorites: ['1', '2'], createdAt: new Date().toISOString() },
-      { id: 'u_seed2', name: 'Jane Smith', email: 'jane@example.com', password: hashPassword('password123'), phone: '(310) 555-1002', avatar: 'https://i.pravatar.cc/150?u=jane', favorites: ['4'], createdAt: new Date().toISOString() },
-      { id: 'u_seed3', name: 'Demo User', email: 'demo@vistahomes.com', password: hashPassword('demo123'), phone: '(310) 555-1003', avatar: 'https://i.pravatar.cc/150?u=demo', favorites: [], createdAt: new Date().toISOString() },
+      { id: 'u_seed1', name: 'John Doe', email: 'john@example.com', password: hashPassword('password123'), phone: '(310) 555-1001', avatar: 'https://randomuser.me/api/portraits/men/22.jpg', favorites: ['1', '2'], createdAt: new Date().toISOString() },
+      { id: 'u_seed2', name: 'Jane Smith', email: 'jane@example.com', password: hashPassword('password123'), phone: '(310) 555-1002', avatar: 'https://randomuser.me/api/portraits/women/28.jpg', favorites: ['4'], createdAt: new Date().toISOString() },
+      { id: 'u_seed3', name: 'Demo User', email: 'demo@vistahomes.com', password: hashPassword('demo123'), phone: '(310) 555-1003', avatar: 'https://randomuser.me/api/portraits/men/15.jpg', favorites: [], createdAt: new Date().toISOString() },
     ];
     localStorage.setItem(USERS_KEY, JSON.stringify(seed));
     return seed;
@@ -76,7 +76,7 @@ export function registerUser(name: string, email: string, password: string): { u
     email: email.toLowerCase(),
     password: hashPassword(password),
     phone: '',
-    avatar: `https://i.pravatar.cc/150?u=${encodeURIComponent(email)}`,
+    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0a2540&color=fff&size=150`,
     favorites: [],
     createdAt: new Date().toISOString(),
   };

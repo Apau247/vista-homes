@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle, Layers } from 'lucide-react';
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [satellite, setSatellite] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,13 +74,25 @@ export default function ContactPage() {
                 </motion.div>
               ))}
 
-              {/* Map Placeholder */}
-              <div className="bg-zinc-200 rounded-2xl h-64 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-8 h-8 text-zinc-400 mx-auto mb-2" />
-                  <p className="text-zinc-500 text-sm font-medium">Map Placeholder</p>
-                  <p className="text-zinc-400 text-xs">123 Wilshire Blvd, Los Angeles</p>
-                </div>
+              {/* Map */}
+              <div className="rounded-2xl overflow-hidden h-64 border border-zinc-200 relative">
+                <iframe
+                  title="Vista Homes Office Location"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={`https://www.google.com/maps?q=123+Wilshire+Blvd+Los+Angeles+CA+90025&output=embed${satellite ? '&maptype=satellite' : ''}`}
+                  allowFullScreen
+                />
+                <button
+                  onClick={() => setSatellite(!satellite)}
+                  className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-xs font-medium px-3 py-1.5 rounded-lg border border-zinc-200 shadow-sm hover:bg-white transition-colors flex items-center gap-1.5 text-zinc-700"
+                >
+                  <Layers className="w-3.5 h-3.5" />
+                  {satellite ? 'Map' : 'Satellite'}
+                </button>
               </div>
             </div>
 

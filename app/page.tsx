@@ -6,7 +6,6 @@ import Testimonials from '@/components/Testimonials';
 import Neighborhoods from '@/components/Neighborhoods';
 import Newsletter from '@/components/Newsletter';
 import { SearchBar } from '@/components/SearchBar';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Building2, Shield, Clock, Award } from 'lucide-react';
 
