@@ -16,6 +16,7 @@ export default function ProfilePage() {
   const { user, loading, logout, updateProfile } = useAuth();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [bio, setBio] = useState('');
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export default function ProfilePage() {
     if (user) {
       setName(user.name);
       setPhone(user.phone || '');
+      setBio((user as any).bio || '');
     }
   }, [user]);
 
@@ -48,7 +50,7 @@ export default function ProfilePage() {
 
   const handleSave = () => {
     setSaving(true);
-    updateProfile({ name, phone });
+    updateProfile({ name, phone, bio: bio || undefined });
     setTimeout(() => {
       setSaving(false);
       toast.success('Profile updated');
@@ -121,6 +123,16 @@ export default function ProfilePage() {
                     onChange={(e) => setPhone(e.target.value)}
                     className="w-full bg-zinc-50 rounded-xl px-4 py-2.5 text-sm text-zinc-800 border border-zinc-200 outline-none focus:border-navy/30 transition-colors"
                     placeholder="Add your phone number"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-zinc-700 mb-1.5">Bio / About</label>
+                  <textarea
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                    className="w-full bg-zinc-50 rounded-xl px-4 py-2.5 text-sm text-zinc-800 border border-zinc-200 outline-none focus:border-navy/30 transition-colors resize-none"
+                    rows={3}
+                    placeholder="Tell us about yourself..."
                   />
                 </div>
                 <button

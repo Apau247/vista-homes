@@ -15,7 +15,7 @@ interface AuthContextType {
   addFavorite: (propertyId: string) => void;
   removeFavorite: (propertyId: string) => void;
   isFavorite: (propertyId: string) => boolean;
-  updateProfile: (updates: Partial<Pick<SessionUser, 'name' | 'phone' | 'avatar'>>) => void;
+  updateProfile: (updates: Partial<Pick<SessionUser, 'name' | 'phone' | 'avatar' | 'bio'>>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);

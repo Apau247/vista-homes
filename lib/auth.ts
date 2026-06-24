@@ -7,6 +7,7 @@ export type User = {
   avatar: string;
   favorites: string[];
   role: 'admin' | 'user';
+  bio?: string;
   createdAt: string;
 };
 
@@ -110,7 +111,13 @@ export function getAllUsers(): Omit<User, 'password'>[] {
   return getUsers().map(({ password: _, ...u }) => u);
 }
 
-export function createUser(name: string, email: string, password: string, role: 'admin' | 'user' = 'user'): Omit<User, 'password'> | null {
+export function createUser(
+  name: string,
+  email: string,
+  password: string,
+  role: 'admin' | 'user' = 'user',
+  extra?: { phone?: string; avatar?: string; bio?: string }
+): Omit<User, 'password'> | null {
   const users = getUsers();
   if (users.some((u) => u.email.toLowerCase() === email.toLowerCase())) return null;
   const newUser: User = {
@@ -118,10 +125,11 @@ export function createUser(name: string, email: string, password: string, role: 
     name,
     email: email.toLowerCase(),
     password: hashPassword(password),
-    phone: '',
-    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0a2540&color=fff&size=150`,
+    phone: extra?.phone || '',
+    avatar: extra?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0a2540&color=fff&size=150`,
     favorites: [],
     role,
+    bio: extra?.bio,
     createdAt: new Date().toISOString(),
   };
   users.push(newUser);
