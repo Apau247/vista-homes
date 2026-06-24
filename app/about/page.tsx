@@ -26,7 +26,7 @@ export default function AboutPage() {
       <section className="relative h-[50vh] min-h-[400px] flex items-center">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('https://picsum.photos/id/104/1920/600')" }}
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=600&fit=crop&q=80')" }}
         />
         <div className="absolute inset-0 hero-gradient" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center text-white">
@@ -71,7 +71,7 @@ export default function AboutPage() {
               className="relative h-80 sm:h-[500px] rounded-2xl overflow-hidden"
             >
               <Image
-                src="https://picsum.photos/id/1018/800/600"
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop&q=80"
                 alt="Vista Homes team"
                 fill
                 className="object-cover"

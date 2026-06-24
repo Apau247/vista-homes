@@ -130,7 +130,7 @@ export default function PropertyDetailPage() {
               viewport={{ once: true }}
               className="bg-zinc-900 rounded-2xl h-64 flex items-center justify-center relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-[url('https://picsum.photos/id/1015/800/400')] bg-cover bg-center opacity-30" />
+              <div               className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=400&fit=crop&q=80')] bg-cover bg-center opacity-30" />
               <div className="relative text-center">
                 <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <div className="w-0 h-0 border-t-8 border-b-8 border-l-12 border-t-transparent border-b-transparent border-l-white ml-1" />

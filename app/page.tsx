@@ -6,6 +6,7 @@ import Testimonials from '@/components/Testimonials';
 import Neighborhoods from '@/components/Neighborhoods';
 import Newsletter from '@/components/Newsletter';
 import { SearchBar } from '@/components/SearchBar';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Building2, Shield, Clock, Award } from 'lucide-react';
 
@@ -25,7 +26,7 @@ export default function Home() {
       <section className="relative h-[85vh] min-h-[600px] flex items-center">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('https://picsum.photos/id/1015/1920/1080')" }}
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80')" }}
         />
         <div className="absolute inset-0 hero-gradient" />
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center text-white">
