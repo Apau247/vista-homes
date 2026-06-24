@@ -16,6 +16,7 @@ export type Property = {
   status: 'For Sale' | 'For Rent' | 'Sold';
   featured: boolean;
   yearBuilt: number;
+  virtualTour?: string;
   agent: {
     name: string;
     phone: string;
@@ -45,6 +46,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: true,
     yearBuilt: 2022,
+    virtualTour: "https://my.matterport.com/show/?m=LK4d6oBvmDD",
     agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://randomuser.me/api/portraits/women/44.jpg" }
   },
   {
@@ -108,6 +110,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: true,
     yearBuilt: 2005,
+    virtualTour: "https://my.matterport.com/show/?m=PF63bHoYnPG",
     agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://randomuser.me/api/portraits/women/44.jpg" }
   },
   {
@@ -211,6 +214,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: true,
     yearBuilt: 2023,
+    virtualTour: "https://my.matterport.com/show/?m=bS1AediFgyP",
     agent: { name: "Sarah Chen", phone: "(310) 555-0123", email: "sarah@vistahomes.com", photo: "https://randomuser.me/api/portraits/women/44.jpg" }
   },
   {
@@ -252,6 +256,7 @@ export const properties: Property[] = [
     status: "For Sale",
     featured: true,
     yearBuilt: 2019,
+    virtualTour: "https://my.matterport.com/show/?m=Nb5nYd5qhDd",
     agent: { name: "Michael Torres", phone: "(213) 555-0456", email: "michael@vistahomes.com", photo: "https://randomuser.me/api/portraits/men/32.jpg" }
   },
   {

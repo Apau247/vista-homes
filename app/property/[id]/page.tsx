@@ -22,6 +22,7 @@ export default function PropertyDetailPage() {
   const [contactForm, setContactForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [contactSent, setContactSent] = useState(false);
   const [scheduleDate, setScheduleDate] = useState('');
+  const [showTour, setShowTour] = useState(false);
 
   if (!property) {
     return (
@@ -123,22 +124,47 @@ export default function PropertyDetailPage() {
               <p className="text-zinc-600 leading-relaxed">{property.description}</p>
             </motion.div>
 
-            {/* Virtual Tour Placeholder */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-zinc-900 rounded-2xl h-64 flex items-center justify-center relative overflow-hidden"
-            >
-              <div               className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=400&fit=crop&q=80')] bg-cover bg-center opacity-30" />
-              <div className="relative text-center">
-                <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <div className="w-0 h-0 border-t-8 border-b-8 border-l-12 border-t-transparent border-b-transparent border-l-white ml-1" />
-                </div>
-                <p className="text-white font-medium">Virtual Tour Available</p>
-                <p className="text-zinc-400 text-sm">Click to explore this property in 3D</p>
-              </div>
-            </motion.div>
+            {/* Virtual Tour */}
+            {property.virtualTour && (
+              <>
+                <motion.button
+                  onClick={() => setShowTour(true)}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="relative w-full bg-zinc-900 rounded-2xl h-64 flex items-center justify-center overflow-hidden group cursor-pointer text-left"
+                >
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=400&fit=crop&q=80')] bg-cover bg-center opacity-30 group-hover:opacity-40 transition-opacity" />
+                  <div className="relative text-center">
+                    <div className="w-16 h-16 bg-white/10 group-hover:bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
+                      <div className="w-0 h-0 border-t-8 border-b-8 border-l-12 border-t-transparent border-b-transparent border-l-white ml-1" />
+                    </div>
+                    <p className="text-white font-medium">Virtual Tour Available</p>
+                    <p className="text-zinc-400 text-sm">Click to explore this property in 3D</p>
+                  </div>
+                </motion.button>
+
+                {/* Tour Modal */}
+                {showTour && (
+                  <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+                    <div className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden">
+                      <iframe
+                        src={property.virtualTour}
+                        className="w-full h-full"
+                        allow="fullscreen; gyroscope; accelerometer; magnetometer"
+                        allowFullScreen
+                      />
+                      <button
+                        onClick={() => setShowTour(false)}
+                        className="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           {/* Sidebar */}
