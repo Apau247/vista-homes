@@ -8,6 +8,7 @@ type SessionUser = Omit<User, 'password'>;
 interface AuthContextType {
   user: SessionUser | null;
   loading: boolean;
+  isAdmin: boolean;
   login: (email: string, password: string) => { success: boolean; error?: string };
   register: (name: string, email: string, password: string) => { success: boolean; error?: string };
   logout: () => void;
@@ -73,7 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [user]);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, addFavorite, removeFavorite, isFavorite, updateProfile }}>
+    <AuthContext.Provider value={{ user, loading, isAdmin: user?.role === 'admin', login, register, logout, addFavorite, removeFavorite, isFavorite, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );

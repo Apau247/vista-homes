@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, Heart, User, LogIn } from 'lucide-react';
+import { Menu, X, Heart, User, LogIn, Shield } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -10,7 +10,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -68,6 +68,17 @@ export default function Navbar() {
               <Heart className={`w-4 h-4 ${pathname === '/favorites' ? 'fill-navy text-navy' : ''}`} />
               Favorites
             </Link>
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
+                  pathname.startsWith('/admin') ? 'text-navy' : 'text-zinc-600 hover:text-navy'
+                }`}
+              >
+                <Shield className="w-4 h-4" />
+                Admin
+              </Link>
+            )}
             {user ? (
               <Link
                 href="/profile"
@@ -133,6 +144,19 @@ export default function Navbar() {
               <Heart className="w-5 h-5" />
               Favorites
             </Link>
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className={`flex items-center gap-2 py-3 px-4 rounded-xl text-base font-medium transition-colors ${
+                  pathname.startsWith('/admin')
+                    ? 'bg-navy/5 text-navy'
+                    : 'text-zinc-700 hover:bg-zinc-50'
+                }`}
+              >
+                <Shield className="w-5 h-5" />
+                Admin
+              </Link>
+            )}
             {user ? (
               <Link
                 href="/profile"
