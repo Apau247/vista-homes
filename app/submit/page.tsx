@@ -17,6 +17,8 @@ export default function SubmitPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // TODO: Backend integration — this currently only shows a toast.
+  // Should POST to an API route to store the submission and notify agents.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.title || !form.price || !form.location || !form.name || !form.email) {

@@ -1,3 +1,8 @@
+// WARNING: This is a demo-only auth implementation using localStorage with a
+// reversible Java-style bit-shift hash. DO NOT use in production.
+// TODO: Integrate with a proper backend (e.g., NextAuth, Supabase, Firebase)
+// and use bcrypt/argon2 for password hashing.
+
 export type User = {
   id: string;
   name: string;

@@ -7,6 +7,8 @@ import toast from 'react-hot-toast';
 export default function Newsletter() {
   const [email, setEmail] = useState('');
 
+  // TODO: Backend integration — this currently only shows a toast.
+  // Should POST to an API endpoint or email service (e.g., Mailchimp, SendGrid).
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes('@')) {

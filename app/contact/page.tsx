@@ -10,6 +10,8 @@ export default function ContactPage() {
   const [sent, setSent] = useState(false);
   const [satellite, setSatellite] = useState(false);
 
+  // TODO: Backend integration — this currently only shows a toast.
+  // Should POST to an API route or external service to actually send the message.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {

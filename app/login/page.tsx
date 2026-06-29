@@ -106,6 +106,8 @@ export default function LoginPage() {
             </p>
           </div>
 
+          {/* NOTE: Demo credentials are for development only. Remove or secure
+              in production. */}
           <div className="mt-4 bg-zinc-50 rounded-xl p-4 text-sm text-zinc-500">
             <p className="font-medium text-zinc-700 mb-1">Demo accounts:</p>
             <p>Email: <span className="text-navy">demo@vistahomes.com</span></p>

@@ -142,7 +142,7 @@ export default function PropertyCard({ property, view = 'grid' }: { property: Pr
           <div className="flex items-center gap-1"><Maximize2 className="w-3.5 h-3.5" /> {property.sqft.toLocaleString()}</div>
         </div>
         <div className="mt-auto pt-4">
-          <div className="w-full py-3 text-center bg-zinc-900 hover:bg-navy text-white rounded-xl transition-all text-sm font-medium">
+          <div className="w-full py-3 text-center bg-zinc-900 hover:bg-navy text-white rounded-xl transition-all text-sm font-medium" aria-hidden="true">
             View Details
           </div>
         </div>

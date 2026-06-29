@@ -41,6 +41,8 @@ export default function PropertyDetailPage() {
     (p) => p.type === property.type && p.id !== property.id
   ).slice(0, 3);
 
+  // TODO: Backend integration — these are placeholders that only show toasts.
+  // Should POST to an API route to send the message and create a calendar event.
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactForm.name || !contactForm.email) {
